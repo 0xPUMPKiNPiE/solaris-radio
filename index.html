@@ -95,6 +95,11 @@
             border-radius: 50%;
             cursor: pointer;
         }
+
+        /* Custom class to reduce font size by exactly 5% */
+        .font-reduce-5 {
+            font-size: 95%;
+        }
     </style>
 </head>
 <body class="text-gray-200">
@@ -137,8 +142,9 @@
 
     <!-- Hero Section -->
     <section id="hero" class="hero-section flex items-center justify-center text-center text-white p-6">
-        <div class="space-y-4 max-w-2xl mx-auto">
-            <h1 class="hero-font text-xl sm:text-3xl md:text-5xl font-bold leading-normal text-shadow-md">Broadcasting from a galaxy near you.</h1>
+        <!-- I've increased the max-width of this container to allow the heading to fit on a single line. -->
+        <div class="space-y-4 max-w-4xl mx-auto">
+            <h1 class="hero-font text-xl sm:text-3xl md:text-5xl font-bold leading-normal text-shadow-md font-reduce-5">Broadcasting from a galaxy near you.</h1>
             <audio id="radio-player" src="https://stream.radio.co/s57906d4e7/listen" preload="none"></audio>
             
             <!-- Now Playing Section -->
