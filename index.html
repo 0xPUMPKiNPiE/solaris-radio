@@ -41,8 +41,8 @@
         /* Custom font import from Google Fonts */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
         
-        .text-shadow-md {
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        .text-soft-shadow {
+            text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
         }
         /* Font for the radio station name */
         .logo-font {
@@ -154,7 +154,7 @@
     <section id="hero" class="hero-section flex items-center justify-center text-center text-white p-6">
         <!-- I've increased the max-width of this container to allow the heading to fit on a single line. -->
         <div class="space-y-4 max-w-4xl mx-auto">
-            <h1 class="hero-font text-xl sm:text-3xl md:text-5xl font-bold leading-normal text-shadow-md font-reduce-5">broadcasting from a galaxy near you</h1>
+            <h1 class="hero-font text-xl sm:text-3xl md:text-5xl font-bold leading-normal text-soft-shadow font-reduce-5">broadcasting from a galaxy near you</h1>
             <audio id="radio-player" src="https://stream.radio.co/s57906d4e7/listen" preload="none"></audio>
             
             <!-- Now Playing Section -->
@@ -184,6 +184,14 @@
                             <td class="py-2">hydro</td>
                             <td class="py-2 text-right">03:00 - 06:00</td>
                         </tr>
+                        <tr class="text-gray-200">
+                            <td class="py-2">breakfast afterhour</td>
+                            <td class="py-2 text-right">06:00 - 12:00</td>
+                        </tr>
+                        <tr class="text-gray-200">
+                            <td class="py-2">restoration sessions</td>
+                            <td class="py-2 text-right">12:00 - 18:00</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -196,7 +204,7 @@
     <!-- About Section -->
     <section id="about" class="py-20 px-6">
         <div class="container mx-auto max-w-5xl text-center">
-            <h2 class="text-4xl font-semibold mb-4 text-white hero-font">who we are</h2>
+            <h2 class="text-4xl font-semibold mb-4 text-white hero-font text-soft-shadow">who we are</h2>
             <p class="text-gray-200 mb-8">beyond the stars, there is a signal. ours! we are the official broadcast of the cosmos, bringing you an evolving roster of cosmic selectors, rare finds, and sonic discoveries from the great unknown.</p>
         </div>
     </section>
