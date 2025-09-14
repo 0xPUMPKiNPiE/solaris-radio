@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>solaris radio</title>
+    <!-- Favicon using a UFO emoji. -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛸</text></svg>">
     <!-- Tailwind CSS CDN for modern, utility-first styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Custom fonts loaded via link tags. Consolidated multiple links for the same font where possible. -->
@@ -265,8 +267,6 @@
                         pauseIcon.classList.add('hidden');
                         playBtn.classList.remove('text-yellow-300');
                         playBtn.classList.add('text-white');
-                        liveDot.classList.remove('live-green-glow');
-                        liveDot.classList.add('live-glow');
                         isPlaying = false;
                     } else {
                         // Attempt to play the audio stream
@@ -276,8 +276,6 @@
                             pauseIcon.classList.remove('hidden');
                             playBtn.classList.remove('text-white');
                             playBtn.classList.add('text-yellow-300');
-                            liveDot.classList.remove('live-glow');
-                            liveDot.classList.add('live-green-glow');
                             isPlaying = true;
                         }).catch(e => {
                             console.error("Audio playback failed:", e);
@@ -310,6 +308,43 @@
                 radioPlayer.style.display = 'none';
             }
 
+            // --- LibreTime Integration for Live Status ---
+            // NOTE: You must replace 'YOUR_LIBRETIME_API_URL' with the actual
+            // live info endpoint from your LibreTime server.
+            const libretimeApiUrl = 'https://your-libretime-domain.com/api/v2/live-info/';
+
+            async function checkLiveStatus() {
+                try {
+                    const response = await fetch(libretimeApiUrl);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const data = await response.json();
+                    
+                    // The LibreTime API returns a 'status' field that we can use
+                    if (data.status === 'online') {
+                        // The stream is live, so we'll make the dot pulse green
+                        liveDot.classList.remove('bg-red-500');
+                        liveDot.classList.add('bg-green-500', 'live-green-glow');
+                    } else {
+                        // The stream is not live, so we'll show the red pulse
+                        liveDot.classList.remove('bg-green-500', 'live-green-glow');
+                        liveDot.classList.add('bg-red-500');
+                    }
+                } catch (error) {
+                    console.error('Could not fetch live status from LibreTime:', error);
+                    // On error, revert to the default red dot state
+                    liveDot.classList.remove('bg-green-500', 'live-green-glow');
+                    liveDot.classList.add('bg-red-500');
+                }
+            }
+
+            // Check the live status immediately on page load
+            checkLiveStatus();
+
+            // Set an interval to check the status every 30 seconds for real-time updates
+            setInterval(checkLiveStatus, 30000);
+
             // --- Scroll-based header effect ---
             const header = document.querySelector('header');
             let lastScrollY = window.scrollY;
@@ -333,4 +368,3 @@
     </script>
 </body>
 </html>
-
